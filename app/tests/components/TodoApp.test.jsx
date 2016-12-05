@@ -12,8 +12,8 @@ describe('TodoApp', () => {
     });
 
     it('should add todo to the todos state on handleAddTodo', () => {
-        var todoText = 'Test text';
-        var todoApp = TestUtils.renderIntoDocument(<TodoApp />);
+        let todoText = 'Add features';
+        let todoApp = TestUtils.renderIntoDocument(<TodoApp />);
 
         todoApp.setState({todos: []});
         todoApp.handleAddTodo(todoText);
@@ -22,12 +22,12 @@ describe('TodoApp', () => {
     });
 
     it('should toggle completed value when handleToggle called', () => {
-        var todoData = {
+        let todoData = {
             id: 27,
             text: "DO something",
             completed: false
         };
-        var todoApp = TestUtils.renderIntoDocument(<TodoApp />);
+        let todoApp = TestUtils.renderIntoDocument(<TodoApp />);
         todoApp.setState({todos: [todoData]});
 
         expect(todoApp.state.todos[0].completed).toBe(false);
