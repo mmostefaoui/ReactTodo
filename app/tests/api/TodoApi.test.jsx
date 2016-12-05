@@ -52,4 +52,41 @@ describe('TodoApi', () => {
             expect(actualTodos).toEqual(todos);
         });
     });
+
+    describe('filterTodos', () => {
+        let todos = [
+            {id: 1, text: "DO something", completed: true},
+            {id: 2, text: "DO something new", completed: false},
+            {id: 3, text: "DO something else", completed: true}
+        ];
+
+        it('should return all items if showCompleted is true', () => {
+            let filteredTodos = TodoApi.filterTodos(todos, true, '');
+
+            expect(filteredTodos.length).toBe(3);
+        });
+
+        it('should return only items not have been completed if showCompleted is false', () => {
+            let filteredTodos = TodoApi.filterTodos(todos, false, '');
+
+            expect(filteredTodos.length).toBe(1);
+        });
+
+        it('should sort by completed status', () => {
+            let filteredTodos = TodoApi.filterTodos(todos, true, '');
+            expect(filteredTodos[0].completed).toBe(false);
+        });
+
+        it('should filter todos by searchText', () => {
+            let filteredTodos = TodoApi.filterTodos(todos, true, 'else');
+
+            expect(filteredTodos.length).toBe(1);
+        });
+
+        it('should return all items if searchTest is empty', () => {
+            let filteredTodos = TodoApi.filterTodos(todos, true, '');
+
+            expect(filteredTodos.length).toBe(3);
+        });
+    });
 });

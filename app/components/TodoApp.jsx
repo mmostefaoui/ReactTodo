@@ -13,8 +13,8 @@ var TodoApp = React.createClass({
             todos: TodoApi.getTodos()
         }
     },
-    componentDidUpdate:function () {
-      TodoApi.setTodos(this.state.todos);
+    componentDidUpdate: function () {
+        TodoApi.setTodos(this.state.todos);
     },
     handleAddTodo: function (text) {
         this.setState({
@@ -44,12 +44,12 @@ var TodoApp = React.createClass({
         })
     },
     render: function () {
-        var {todos}=this.state;
-
+        let {todos, showCompleted, searchText}=this.state;
+        let filteredTodos = TodoApi.filterTodos(todos, showCompleted, searchText);
         return (
             <div>
                 <TodoSearch onSearch={this.handleSearch}/>
-                <TodoList todos={todos} onToggle={this.handleToggle}/>
+                <TodoList todos={filteredTodos} onToggle={this.handleToggle}/>
                 <TodoAdd onAddTodo={this.handleAddTodo}/>
             </div>);
     }
